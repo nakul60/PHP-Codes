@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FaceBook Registration Form</title>
+    <style>
+        body{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .error{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h2>FaceBook Registration Form</h2>
+    <form id = "fb_form">
+
+        <label for="username">Username: </label>
+        <input type="text" id = "username" name = "username" required>
+        <div class="error username_error"></div>
+        <br>
+
+        <label for="email">Email: </label>
+        <input type="email" id = "email" name = "email" required>
+        <div class="error email_error"></div>
+        <br>
+
+        <label for="phone">Phone: </label>
+        <input type="number" id = "phone" name = "phone" required>
+        <div class="error phone_error"></div>
+        <br>
+
+        <label for="pass">Password: </label>
+        <input type="password" id = "pass" name = "pass" required>
+        <div class="error pass_error"></div>
+        <br>
+
+        <button type="submit">Register Now</button>
+
+    </form>
+
+    <script>
+        const form = document.getElementById("fb_form");
+        form.addEventListener("submit", (e)=>{
+            e.preventDefault();
+
+            const username = document.querySelector("#username").value.trim();
+            const email = document.querySelector("#email").value.trim();
+            const phone = document.querySelector("#phone").value.trim();
+            const pass = document.querySelector("#pass").value.trim();
+
+            const username_error = document.querySelector(".username_error");
+            const email_error = document.querySelector(".email_error");
+            const phone_error = document.querySelector(".phone_error");
+            const pass_error = document.querySelector(".pass_error");
+
+            let isValid = true;
+
+            username_error.textContent = "";
+            email_error.textContent = "";
+            phone_error.textContent = "";
+            pass_error.textContent = "";
+
+            if(username === "")
+            {
+                username_error.textContent = "Name is required!";
+                isValid = false;
+            }
+
+            const pattern = /^[a-zA-Z0-9.+%-_]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if(email === "" || !pattern.test(email))
+            {
+                email_error.textContent = "Enter a valid Email Addrress!";
+                isValid = false;
+            }
+
+            if(phone.length !== 10 || isNaN(phone))
+            {
+                phone_error.textContent = "Enter a valid Phone Number!";
+                isValid = false;
+            }
+
+            if(pass.length < 6)
+            {
+                pass_error.textContent = "Enter a Valid Password!";
+                isValid = false;
+            }
+
+            if(isValid)
+            {
+                alert("Form Submitted Successfully!");
+                form.reset();
+            }
+
+        });
+    </script>
+
+</body>
+</html>

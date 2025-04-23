@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 20px;
+            background-color: burlywood;
+        }
+
+        .calculator {
+            background-color: brown;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: column;
+            width: 500px;
+            height: 500px;
+            border: 2px solid black;
+            border-radius: 15px;
+        }
+
+        #output {
+            background-color: lightgreen;
+            margin: 2px;
+            width: 450px;
+            height: 60px;
+            border: 2px solid black;
+            border-radius: 15px;
+            color: black;
+            font-weight: 500;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            padding: 10px;
+            font-size: 20px;
+        }
+
+        .input {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            margin: 2px;
+            height: 400px;
+            width: 450px;
+            place-items: center;
+        }
+
+        button {
+            background-color: lightblue;
+            color: black;
+            border: 2px solid white;
+            width: 70px;
+            height: 70px;
+            border-radius: 60px;
+            border: none;
+            font-size: 20px;
+        }
+
+        #clear {
+            background-color: lightblue;
+            color: black;
+            border: 2px solid black;
+            width: 400px;
+            height: 30px;
+            border-radius: 12px;
+            margin: 5px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Simple Arithmetic Calculator</h2>
+    <div class="calculator">
+        <div id="output"></div>
+
+        <div class="input">
+            <button onclick="append('7')">7</button>
+            <button onclick="append('8')">8</button>
+            <button onclick="append('9')">9</button>
+            <button onclick="append('/')">/</button>
+
+            <button onclick="append('4')">4</button>
+            <button onclick="append('5')">5</button>
+            <button onclick="append('6')">6</button>
+            <button onclick="append('*')">*</button>
+
+            <button onclick="append('1')">1</button>
+            <button onclick="append('2')">2</button>
+            <button onclick="append('3')">3</button>
+            <button onclick="append('-')">-</button>
+
+            <button onclick="append('0')">0</button>
+            <button onclick="append('.')">.</button>
+            <button onclick="append('=')">=</button>
+            <button onclick="append('+')">+</button>
+        </div>
+
+        <button id="clear" onclick="cleardisplay()">Clear</button>
+    </div>
+
+    <script>
+        let ele = document.getElementById("output");
+        function append(val)
+        {
+            if(val === '=')
+            {
+                try{
+                    const res = eval(ele.textContent);
+                    ele.textContent = res;
+                }
+                catch(error)
+                {
+                    ele.textContent = "Error";
+                }
+            }
+            else
+            {
+                ele.textContent += val;
+            }
+        }
+        function cleardisplay() 
+        {
+            ele.textContent = "";
+        }
+    </script>
+
+</body>
+</html>

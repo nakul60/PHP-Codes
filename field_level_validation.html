@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FaceBook Registration Form</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h2>FaceBook Registration Form</h2>
+    <form id="fb_form">
+        <label for="username">Username: </label>
+        <input type="text" id="username" name="username" required>
+        <div class="error username_error"></div>
+        <br>
+
+        <label for="email">Email: </label>
+        <input type="email" id="email" name="email" required>
+        <div class="error email_error"></div>
+        <br>
+
+        <label for="phone">Phone: </label>
+        <input type="tel" id="phone" name="phone" required>
+        <div class="error phone_error"></div>
+        <br>
+
+        <label for="pass">Password: </label>
+        <input type="password" id="pass" name="pass" required>
+        <div class="error pass_error"></div>
+        <br>
+
+        <button type="submit">Register Now</button>
+    </form>
+
+    <script>
+        const username = document.getElementById("username");
+        const email = document.getElementById("email");
+        const phone = document.getElementById("phone");
+        const pass = document.getElementById("pass");
+
+        const username_error = document.querySelector(".username_error");
+        const email_error = document.querySelector(".email_error");
+        const phone_error = document.querySelector(".phone_error");
+        const pass_error = document.querySelector(".pass_error");
+
+        // Email validation regex
+        const emailPattern = /^[a-zA-Z0-9.+%-_]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        // Individual field validation on blur
+        username.addEventListener("blur", () => {
+            const value = username.value.trim();
+            username_error.textContent = value === "" ? "Name is required!" : "";
+        });
+
+        email.addEventListener("blur", () => {
+            const value = email.value.trim();
+            if (value === "" || !emailPattern.test(value)) {
+                email_error.textContent = "Enter a valid Email Address!";
+            } else {
+                email_error.textContent = "";
+            }
+        });
+
+        phone.addEventListener("blur", () => {
+            const value = phone.value.trim();
+            if (value.length !== 10 || isNaN(value)) {
+                phone_error.textContent = "Enter a valid Phone Number!";
+            } else {
+                phone_error.textContent = "";
+            }
+        });
+
+        pass.addEventListener("blur", () => {
+            const value = pass.value.trim();
+            pass_error.textContent = value.length < 6 ? "Enter a Valid Password!" : "";
+        });
+
+        // Optional: form submission check too
+        const form = document.getElementById("fb_form");
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            // If all errors are empty
+            if (
+                username_error.textContent === "" &&
+                email_error.textContent === "" &&
+                phone_error.textContent === "" &&
+                pass_error.textContent === ""
+            ) {
+                alert("Form Submitted Successfully!");
+                form.reset();
+            } else {
+                alert("Please fix the errors before submitting.");
+            }
+        });
+    </script>
+</body>
+</html>
